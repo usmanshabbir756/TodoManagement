@@ -10,6 +10,7 @@ public interface TodoService {
     public TodoDto addTodo(TodoDto todoDto);
     public TodoDto getTodo(Long todoId);
     public List<TodoDto> getAllTodos();
+    public TodoDto updateTodo(Long todoId,TodoDto todoDto);
 
 
 }
