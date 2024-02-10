@@ -9,8 +9,6 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.modelmapper.ModelMapper;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -56,5 +54,12 @@ public class TodoServiceImpl implements TodoService {
         todo.setCompleted(todoDto.isCompleted());
         Todo updatedTodo=todoRepository.save(todo);
         return modelMapper.map(updatedTodo,TodoDto.class);
+    }
+
+    @Override
+    public void deleteTodo(Long todoId) {
+        Todo todo=todoRepository.findById(todoId)
+                .orElseThrow(()->new ResponseNotFound("Not found id : "+todoId));
+        todoRepository.delete(todo);
     }
 }
