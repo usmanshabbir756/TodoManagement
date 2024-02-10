@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @RestController
@@ -28,5 +30,11 @@ public class TodoController {
     @GetMapping("{id}")
     public ResponseEntity<TodoDto> getTodoByID(@PathVariable("id") Long todoId){
         return ResponseEntity.ok(todoService.getTodo(todoId));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<TodoDto>> getAllToodos(){
+        List<TodoDto> todosDto=todoService.getAllTodos();
+        return ResponseEntity.ok(todosDto);
     }
 }
