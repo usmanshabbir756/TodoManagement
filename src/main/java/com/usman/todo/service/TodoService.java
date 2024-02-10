@@ -7,11 +7,13 @@ import java.util.List;
 
 public interface TodoService {
 
-    public TodoDto addTodo(TodoDto todoDto);
-    public TodoDto getTodo(Long todoId);
-    public List<TodoDto> getAllTodos();
-    public TodoDto updateTodo(Long todoId,TodoDto todoDto);
-    public void deleteTodo(Long todoId);
+    TodoDto addTodo(TodoDto todoDto);
+    TodoDto getTodo(Long todoId);
+    List<TodoDto> getAllTodos();
+    TodoDto updateTodo(Long todoId,TodoDto todoDto);
+    void deleteTodo(Long todoId);
+    TodoDto completeTodo(Long todoId);
+    TodoDto inCompleteTodo(Long todoId);
 
 
 }

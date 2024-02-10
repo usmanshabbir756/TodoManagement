@@ -2,6 +2,7 @@ package com.usman.todo.controller;
 
 
 import com.usman.todo.dto.TodoDto;
+import com.usman.todo.entity.Todo;
 import com.usman.todo.service.TodoService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -48,5 +49,15 @@ public class TodoController {
     public ResponseEntity<String> deleteTodo(@PathVariable("id") Long todoId){
         todoService.deleteTodo(todoId);
         return ResponseEntity.ok("Deleted Sucessfully.");
+    }
+
+    @PatchMapping("{id}/complete")
+    public ResponseEntity<TodoDto> completeTodo(@PathVariable("id") Long todoId){
+        return ResponseEntity.ok(todoService.completeTodo(todoId));
+    }
+
+    @PatchMapping("{id}/in-complete")
+    public ResponseEntity<TodoDto> inCompleteTodo(@PathVariable("id") Long todoId){
+        return ResponseEntity.ok(todoService.inCompleteTodo(todoId));
     }
 }
