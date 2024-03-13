@@ -2,6 +2,9 @@ package com.usman.todo.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -23,9 +26,15 @@ public class SpringSecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.csrf((csrf)-> csrf.disable())
-                .authorizeHttpRequests((authorize)->
-                        authorize.anyRequest().authenticated()
-                ).httpBasic(Customizer.withDefaults());
+                .authorizeHttpRequests((authorize)-> {
+                    authorize.requestMatchers(HttpMethod.POST, "/api/**").hasRole("ADMIN");
+                    authorize.requestMatchers(HttpMethod.PUT, "/api/**").hasRole("ADMIN");
+                    authorize.requestMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMIN");
+                    authorize.requestMatchers(HttpMethod.GET, "/api/**").hasAnyRole("ADMIN" , "USER");
+                    authorize.requestMatchers(HttpMethod.PATCH, "/api/**").hasAnyRole("ADMIN","USER");
+//                    authorize.requestMatchers(HttpMethod.GET,"/api/**").permitAll();
+                    authorize.anyRequest().authenticated();
+                }).httpBasic(Customizer.withDefaults());
         return http.build();
     }
 
