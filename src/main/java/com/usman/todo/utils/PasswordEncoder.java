@@ -6,6 +6,6 @@ public class PasswordEncoder {
     public static void main(String[] args) {
         org.springframework.security.crypto.password.PasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
         System.out.println(passwordEncoder.encode("usman"));
-        System.out.println(passwordEncoder.encode("admin"));
+        System.out.println(passwordEncoder.encode("admin1"));
     }
 }
